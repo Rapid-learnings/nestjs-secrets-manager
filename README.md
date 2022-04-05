@@ -172,7 +172,7 @@ export class AppController {
 
 NestJS with AWS Secrets Manager can make it easy for us to create a web application, at the same time it gives us the necessary security to deploy them, especially in microservices and with the ease to do it quickly.
 
-credits:
+## credits:
 
 https://github.com/ajdelgados/nestjs-aws-secrets-manager
 &
