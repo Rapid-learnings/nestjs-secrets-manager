@@ -14,12 +14,12 @@ export class AppController {
     return await this.configService.get('PORT');
   }
 
-  @Get('secondPhrase')
+  @Get('/secondPhrase')
   async getSecondPhrase(): Promise<string> {
     return await this.configService.get('SOME_VAL');
   }
 
-  @Get('threePhrase')
+  @Get('/threePhrase')
   getThreePhrase(): string {
     return this.configService.getStatic('SOME_VAL');
   }
