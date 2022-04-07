@@ -38,27 +38,35 @@ export class AwsConfigService {
       .catch((err) => (error = err));
 
     if (error) {
-      if (error.code === "DecryptionFailureException")
-        // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
-        // Deal with the exception here, and/or rethrow at your discretion.
-        throw error;
-      else if (error.code === "InternalServiceErrorException")
-        // An error occurred on the server side.
-        // Deal with the exception here, and/or rethrow at your discretion.
-        throw error;
-      else if (error.code === "InvalidParameterException")
-        // You provided an invalid value for a parameter.
-        // Deal with the exception here, and/or rethrow at your discretion.
-        throw error;
-      else if (error.code === "InvalidRequestException")
-        // You provided a parameter value that is not valid for the current state of the resource.
-        // Deal with the exception here, and/or rethrow at your discretion.
-        throw error;
-      else if (error.code === "ResourceNotFoundException")
-        // We can't find the resource that you asked for.
-        // Deal with the exception here, and/or rethrow at your discretion.
-        throw error;
+      // ! Use only if applicable.
+      // switch (error.code) {
+      //   case "DecryptionFailureException":
+      //     // Secrets Manager can't decrypt the protected secret text using the provided KMS key.
+      //     // Deal with the exception here, and/or rethrow at your discretion.
+      //     break;
+      //   case "InternalServiceErrorException":
+      //     // An error occurred on the server side.
+      //     // Deal with the exception here, and/or rethrow at your discretion.
+      //     break;
+      //   case "InvalidParameterException":
+      //     // You provided an invalid value for a parameter.
+      //     // Deal with the exception here, and/or rethrow at your discretion.
+      //     break;
+      //   case "InvalidRequestException":
+      //     // You provided a parameter value that is not valid for the current state of the resource.
+      //     // Deal with the exception here, and/or rethrow at your discretion.
+      //     break;
+      //   case "ResourceNotFoundException":
+      //     // We can't find the resource that you asked for.
+      //     // Deal with the exception here, and/or rethrow at your discretion.
+      //     break;
+      //   default:
+      //     break;
+      // }
+      throw error
     }
+
+    
     const resultSecrets = JSON.parse(secrets.SecretString);
 
     // eslint-disable-next-line prefer-const
