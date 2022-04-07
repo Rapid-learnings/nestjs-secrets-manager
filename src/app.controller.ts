@@ -9,11 +9,6 @@ export class AppController {
     private readonly configService: awsConfigService,
   ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Get('/firstPhrase')
   async getFirstPhrase(): Promise<string> {
     return await this.configService.get('PORT');
