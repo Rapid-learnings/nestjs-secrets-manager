@@ -39,16 +39,16 @@ Using the above statements, not only were the module and service generated, but 
 
 ```Javascript
 import { Module } from '@nestjs/common';
-import { awsConfigService } from './aws-config.service';
+import { AwsConfigService } from './aws-config.service';
 
 @Module({
-  providers: [awsConfigService],
-  exports: [awsConfigService]
+  providers: [AwsConfigService],
+  exports: [AwsConfigService]
 })
-export class awsConfigModule {}
+export class AwsConfigModule {}
 ```
 
-We are going to modify the awsConfigService to create some methods and use the AWS SDK, calling the Secret Manager API. We already have the SDK installed in the project, so we proceed to import and create variables that will be useful when making the instance of the class.
+We are going to modify the AwsConfigService to create some methods and use the AWS SDK, calling the Secret Manager API. We already have the SDK installed in the project, so we proceed to import and create variables that will be useful when making the instance of the class.
 
 ```JavaScript
 import { Injectable } from '@nestjs/common';
@@ -137,13 +137,13 @@ The Config module has already been imported into the main App module, so we proc
 ```JavaScript
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { awsConfigService } from './config/aws-config.service';
+import { AwsConfigService } from './config/aws-config.service';
 
 @Controller()
 export class AppController {
   builder(
     private readonly appService: AppService,
-    private readonly configService: awsConfigService
+    private readonly configService: AwsConfigService
   ) {}
 
   @Get()

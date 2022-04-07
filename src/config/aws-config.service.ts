@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import SecretsManager from "aws-sdk/clients/secretsmanager";
 
 @Injectable()
-export class awsConfigService {
+export class AwsConfigService {
   constructor(private configService: ConfigService) {}
 
   private readonly region = this.configService.get("AWS_REGION")
