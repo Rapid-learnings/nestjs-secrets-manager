@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config/dist/config.module';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AwsConfigModule } from './config/aws-config.module';
+import configuration from './app.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: [`.env`],
-      // isGlobal: true,
+      isGlobal: true,
+      load: [configuration],
+      envFilePath: [`${process.env.NODE_ENV || ''}.env`],
     }),
-    AwsConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService],
