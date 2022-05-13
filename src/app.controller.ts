@@ -10,7 +10,7 @@ export class AppController {
   ) {}
 
   @Get('secrets/:secretName')
-  async getSecret(@Param('secretName') secretName: string): Promise<string> {
-    return await this.configService.get(secretName);
+  getSecret(@Param('secretName') secretName: string): string {
+    return this.configService.get(secretName);
   }
 }
