@@ -28,7 +28,6 @@ async function loadSecretsFromAWS() {
     Object.keys(parsedSecrets).forEach(function (key) {
       process.env[key] = parsedSecrets[key];
     });
-    return process.env;
   } catch (error) {
     // switch (error.code) {
     //   case "DecryptionFailureException":
