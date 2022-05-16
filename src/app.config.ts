@@ -1,4 +1,4 @@
-import { config, SecretsManager } from 'aws-sdk';
+import { SecretsManager } from 'aws-sdk';
 
 export default async () => {
   return await loadSecretsFromAWS();
@@ -10,27 +10,24 @@ async function loadSecretsFromAWS() {
      *  This can be used in development environment
      *  For production always use AWS CLI - https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config
      */
-    config.update({
+
+    const client = new SecretsManager({
       region: process.env.AWS_REGION,
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY,
+      accessKeyId: process.env.AWS_ACCESS_KEY, // In server we dont need this. This will load automatically from the system.
+      secretAccessKey: process.env.AWS_SECRET_KEY, // In server we dont need this. This will load automatically from the system.
     });
 
-    const client = new SecretsManager();
-
+    // AWS_SECRET_NAME is a house where our secrets are stored.[ARN]
     const secrets = await client
       .getSecretValue({ SecretId: process.env.AWS_SECRET_NAME })
       .promise();
 
-    return JSON.parse(secrets.SecretString);
+    const parsedSecrets = JSON.parse(secrets.SecretString);
 
-    /**
-      * We can also store it in process.env
-      
-        Object.keys(parsedSecrets).forEach(function(key) {
-          process.env[key] = parsedSecrets[key];
-        });
-     */
+    // Store secrets to process env
+    Object.keys(parsedSecrets).forEach(function (key) {
+      process.env[key] = parsedSecrets[key];
+    });
   } catch (error) {
     // switch (error.code) {
     //   case "DecryptionFailureException":
