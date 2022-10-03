@@ -1,9 +1,15 @@
 import { SecretsManager } from 'aws-sdk';
 
+/**
+ * It calls the loadSecretsFromAWS function when it is loaded into the configModule.
+ */
 export default async () => {
   return await loadSecretsFromAWS();
 };
 
+/**
+ * It fetches the secrets from AWS Secrets Manager and store the secrets as environment variables.
+ */
 async function loadSecretsFromAWS() {
   try {
     /**
